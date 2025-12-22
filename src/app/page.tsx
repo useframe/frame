@@ -1,13 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import { trpc } from "@/trpc/server";
+import { useTRPC } from "@/trpc/client";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
-export default async function Home() {
-  const data = trpc.hello.queryOptions({ text: "John" });
-
-  console.log(data);
+export default function Home() {
+  const trpc = useTRPC();
+  const [value, setValue] = useState("");
+  const invoke = useMutation(
+    trpc.invoke.mutationOptions({
+      onSuccess: (data) => {
+        toast.success("Background job invoked");
+      },
+    })
+  );
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <Input value={value} onChange={(e) => setValue(e.target.value)} />
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
@@ -55,6 +69,12 @@ export default async function Home() {
             />
             Deploy Now
           </a>
+          <button
+            disabled={invoke.isPending}
+            onClick={() => invoke.mutate({ value })}
+          >
+            {invoke.isPending ? "Invoking..." : "Invoke Background Job"}
+          </button>
           <a
             className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
