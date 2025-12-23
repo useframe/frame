@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 import { Sandbox } from "@e2b/code-interpreter";
 import {
   openai,

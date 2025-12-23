@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 import { generateSlug } from "random-word-slugs";
 import { baseProcedure, createTRPCRouter } from "@/trpc/init";
 
