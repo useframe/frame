@@ -24,7 +24,7 @@ export default function Home() {
       },
     })
   );
-  
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <div className="flex flex-col gap-y-4 justify-center items-center mx-auto w-full max-w-md">
