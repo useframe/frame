@@ -23,7 +23,7 @@ const Project = async ({ params }: ProjectProps) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading Projects...</div>}>
         <ProjectView projectId={projectId} />
       </Suspense>
     </HydrationBoundary>
