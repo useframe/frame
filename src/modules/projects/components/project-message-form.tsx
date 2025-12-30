@@ -1,23 +1,16 @@
-import { z } from "zod";
-import { toast } from "sonner";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTRPC } from "@/trpc/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
+import { useTRPC } from "@/trpc/client";
 
 const projectMessageFormSchema = z.object({
   value: z
@@ -107,10 +100,9 @@ const ProjectMessageForm = ({ projectId }: ProjectMessageFormProps) => {
         <div className="flex gap-x-2 items-end justify-between pt-2">
           <div className="text-[10px] text-muted-foreground font-mono">
             <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
-              <span>&#8984;</span>
-              Enter
-            </kbd>
-            &nbsp;to Submit
+              <span>&#8984;</span> Enter
+            </kbd>{" "}
+            to Submit
           </div>
           <Button
             disabled={isButtonDisabled}

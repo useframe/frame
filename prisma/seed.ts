@@ -1,4 +1,9 @@
-import { PrismaClient, Prisma } from "@/generated/prisma/client";
+import {
+  Prisma,
+  PrismaClient,
+  MessageRole,
+  MessageType,
+} from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
 
@@ -10,33 +15,22 @@ const prisma = new PrismaClient({
   adapter,
 });
 
-const userData: Prisma.UserCreateInput[] = [
+const projectData: Prisma.ProjectCreateInput[] = [
   {
-    name: "Alice",
-    email: "alice@prisma.io",
-    posts: {
+    name: "Sample Project",
+    description: "A sample project for testing",
+    userId: "user_123",
+    messages: {
       create: [
         {
-          title: "Join the Prisma Discord",
-          content: "https://pris.ly/discord",
-          published: true,
+          content: "Hello, this is a test message",
+          role: MessageRole.USER,
+          type: MessageType.RESULT,
         },
         {
-          title: "Prisma on YouTube",
-          content: "https://pris.ly/youtube",
-        },
-      ],
-    },
-  },
-  {
-    name: "Bob",
-    email: "bob@prisma.io",
-    posts: {
-      create: [
-        {
-          title: "Follow Prisma on Twitter",
-          content: "https://www.twitter.com/prisma",
-          published: true,
+          content: "This is a response message",
+          role: MessageRole.ASSISTANT,
+          type: MessageType.RESULT,
         },
       ],
     },
@@ -47,22 +41,26 @@ export async function main() {
   console.log("🌱 Starting seed...");
 
   try {
-    for (const u of userData) {
-      // Use upsert to make seed idempotent (safe to run multiple times)
-      const user = await prisma.user.upsert({
-        where: { email: u.email },
-        update: {
-          name: u.name,
-          // Update posts if they exist
-          posts: {
-            deleteMany: {}, // Clear existing posts
-            create: u.posts?.create || [],
-          },
+    for (const project of projectData) {
+      // Check if project already exists by name and userId
+      const existingProject = await prisma.project.findFirst({
+        where: {
+          name: project.name,
+          userId: project.userId,
         },
-        create: u,
       });
 
-      console.log(`✅ User ${user.email} seeded`);
+      if (existingProject) {
+        console.log(`⏭️  Project ${project.name} already exists, skipping...`);
+        continue;
+      }
+
+      // Create new project with messages
+      const createdProject = await prisma.project.create({
+        data: project,
+      });
+
+      console.log(`✅ Project ${createdProject.name} seeded`);
     }
 
     console.log("✨ Seed completed successfully!");

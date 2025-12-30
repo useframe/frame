@@ -136,9 +136,8 @@ export const codeAgentFunction = inngest.createFunction(
       ],
       lifecycle: {
         onResponse: async ({ result, network }) => {
-          const lastAssistantTextMessage = await lastAssistantMessageContent(
-            result
-          );
+          const lastAssistantTextMessage =
+            await lastAssistantMessageContent(result);
 
           if (lastAssistantTextMessage && network) {
             if (lastAssistantTextMessage.includes("<task_summary>")) {
@@ -168,7 +167,7 @@ export const codeAgentFunction = inngest.createFunction(
 
     const isError = Boolean(
       !result.state.data.summary ||
-        Object.keys(result.state.data.files || {}).length === 0
+      Object.keys(result.state.data.files || {}).length === 0
     );
 
     const sandboxUrl = await step.run("get-sandbox-url", async () => {

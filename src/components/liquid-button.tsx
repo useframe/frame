@@ -15,7 +15,6 @@ export function LiquidButton() {
             colorTint="#FFFFFF"
             className={styles.liquidMetalShader}
           />
-          
         </div>
       </div>
     </div>

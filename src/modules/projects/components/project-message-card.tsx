@@ -91,6 +91,7 @@ const AssistantMessage = ({
         <span className="text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
           {format(createdAt, "HH:mm 'on' MMM dd, yyyy")}
         </span>
+        <span className="hidden">{updatedAt.toISOString()}</span>
       </div>
       <div className="pl-8.5 flex flex-col gap-4">
         <span>{content}</span>
