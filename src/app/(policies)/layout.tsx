@@ -1,15 +1,16 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "@/styles/globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
-const poppins = Poppins({
+const roboto = Roboto({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-roboto",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
@@ -30,39 +31,39 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.rapidhyre.ai"),
+  metadataBase: new URL("https://useframe.vercel.app"),
   title: {
-    template: "%s | Rapidhyre AI - Smart, Scalable Hiring",
-    default: "Rapidhyre AI - Smart, Scalable Hiring",
+    template: "%s | Frame AI - Build Interactive Web Experiences",
+    default: "Frame AI - Build Interactive Web Experiences",
   },
   description:
-    "Rapidhyre AI is an intelligent recruitment platform that automates candidate screening, scheduling, and communication—enabling faster, fairer, and more efficient hiring at scale.",
-  applicationName: "Rapidhyre AI - Smart Hiring Platform",
+    "Frame AI is a powerful platform for creating, building, and sharing interactive web experiences and code-based frames with AI-powered assistance. Build, iterate, and deploy interactive projects with ease.",
+  applicationName: "Frame AI - Interactive Web Platform",
   authors: [
-    { name: "Rapidhyre AI Team", url: "https://www.rapidhyre.ai/about" },
+    { name: "Frame AI Team", url: "https://useframe.vercel.app/about" },
   ],
-  generator: "Rapidhyre AI Platform using Next.js 15, TypeScript, and Supabase",
+  generator: "Frame AI Platform using Next.js 16, tRPC, and Supabase and Clerk",
   keywords: [
-    "AI in HR",
-    "AI Agents",
-    "AI Recruiting",
-    "Automated Hiring",
-    "Smart Recruitment",
-    "Candidate Screening",
-    "Interview Automation",
-    "AI Hiring Platform",
-    "Recruitment Automation",
-    "AI Talent Acquisition",
-    "Resume Parsing",
-    "Hiring Software",
-    "AI Interview Scheduling",
-    "Recruiter Productivity",
-    "Fair Hiring",
-    "Rapidhyre AI",
+    "Frame AI",
+    "Interactive Web",
+    "Code Frames",
+    "Web Development",
+    "AI Coding Assistant",
+    "Code Interpreter",
+    "Sandbox Environment",
+    "Web Projects",
+    "Interactive Experiences",
+    "Code Sharing",
+    "Web Builder",
+    "AI Development",
+    "Code Playground",
+    "Web Frameworks",
+    "Interactive Design",
+    "Frame Platform",
   ],
   referrer: "no-referrer-when-downgrade",
-  creator: "Rapidhyre AI",
-  publisher: "Rapidhyre AI Labs",
+  creator: "Frame AI",
+  publisher: "Frame AI Labs",
   robots: {
     index: true,
     follow: true,
@@ -84,17 +85,17 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.rapidhyre.ai",
+    canonical: "https://useframe.vercel.app",
     languages: {
-      "en-US": "https://www.rapidhyre.ai/en-US",
-      "es-ES": "https://www.rapidhyre.ai/es-ES",
-      "fr-FR": "https://www.rapidhyre.ai/fr-FR",
+      "en-US": "https://useframe.vercel.app/en-US",
+      "es-ES": "https://useframe.vercel.app/es-ES",
+      "fr-FR": "https://useframe.vercel.app/fr-FR",
     },
     media: {
-      "(max-width: 600px)": "https://m.rapidhyre.ai",
+      "(max-width: 600px)": "https://useframe.vercel.app",
     },
     types: {
-      "application/rss+xml": "https://www.rapidhyre.ai/rss.xml",
+      "application/rss+xml": "https://useframe.vercel.app/rss.xml",
     },
   },
   icons: {
@@ -150,17 +151,17 @@ export const metadata: Metadata = {
     determiner: "auto",
     locale: "en_US",
     alternateLocale: ["en_GB", "es_ES", "fr_FR"],
-    url: "https://www.rapidhyre.ai",
-    siteName: "Rapidhyre AI - Smart, Scalable Hiring",
-    title: "Rapidhyre AI - Smart, Scalable Hiring",
+    url: "https://useframe.vercel.app",
+    siteName: "Frame AI - Build Interactive Web Experiences",
+    title: "Frame AI - Build Interactive Web Experiences",
     description:
-      "Rapidhyre AI automates the hiring process with intelligent screening, scheduling, and communication tools—accelerating recruitment while ensuring fairness and efficiency.",
-    emails: ["support@rapidhyre.ai"],
+      "Frame AI is a powerful platform for creating, building, and sharing interactive web experiences and code-based frames with AI-powered assistance. Build, iterate, and deploy interactive projects with ease.",
+    emails: ["support@useframe.vercel.app"],
     phoneNumbers: ["+1-800-123-4567"],
     videos: [
       {
-        url: "https://www.rapidhyre.ai/assets/rapidhyre-ai-demo.mp4",
-        secureUrl: "https://cdn.rapidhyre.ai/demo.mp4",
+        url: "https://useframe.vercel.app/assets/frame-ai-demo.mp4",
+        secureUrl: "https://useframe.vercel.app/demo.mp4",
         type: "video/mp4",
         width: 1280,
         height: 720,
@@ -168,7 +169,7 @@ export const metadata: Metadata = {
     ],
     audio: [
       {
-        url: "https://www.rapidhyre.ai/assets/rapidhyre-ai-intro.mp3",
+        url: "https://useframe.vercel.app/assets/frame-ai-intro.mp3",
         type: "audio/mpeg",
       },
     ],
@@ -177,39 +178,39 @@ export const metadata: Metadata = {
         url: "/brand/logo.png",
         width: 1200,
         height: 630,
-        alt: "Rapidhyre AI Logo",
+        alt: "Frame AI Logo",
       },
       {
         url: "/brand/social-card.png",
         width: 1200,
         height: 600,
-        alt: "Rapidhyre AI - Hiring Automation",
+        alt: "Frame AI - Interactive Web Platform",
       },
     ],
-    countryName: "United States",
+    countryName: "India",
     ttl: 86400,
   },
   twitter: {
     card: "summary_large_image",
-    site: "@round_ai",
+    site: "@frame_ai",
     siteId: "1234567890",
-    creator: "@round_ai",
+    creator: "@frame_ai",
     creatorId: "1234567890",
-    title: "Rapidhyre AI - Smart, Scalable Hiring",
+    title: "Frame AI - Build Interactive Web Experiences",
     description:
-      "Experience faster, fairer hiring with Rapidhyre AI's automated screening, scheduling, and candidate communications.",
+      "Create, build, and share interactive web experiences and code-based frames with AI-powered assistance. Build, iterate, and deploy interactive projects with ease.",
     images: [
       {
-        url: "https://www.rapidhyre.ai/brand/social-card.png",
-        alt: "Rapidhyre AI - Automated Recruitment Dashboard",
-        secureUrl: "https://cdn.rapidhyre.ai/social-card.png",
+        url: "https://useframe.vercel.app/brand/social-card.png",
+        alt: "Frame AI - Interactive Web Platform",
+        secureUrl: "https://useframe.vercel.app/social-card.png",
         type: "image/png",
         width: 1200,
         height: 600,
       },
       {
-        url: "https://www.rapidhyre.ai/brand/logo-twitter.png",
-        alt: "Rapidhyre AI Logo",
+        url: "https://useframe.vercel.app/brand/logo-twitter.png",
+        alt: "Frame AI Logo",
         type: "image/png",
         width: 600,
         height: 600,
@@ -219,8 +220,8 @@ export const metadata: Metadata = {
     // card: "player",
     // players: [
     //   {
-    //     playerUrl: "https://www.rapidhyre-ai.ai/embed/demo-player.html",
-    //     streamUrl: "https://cdn.rapidhyre-ai.ai/demo.mp4",
+    //     playerUrl: "https://www.useframe.vercel.app/embed/demo-player.html",
+    //     streamUrl: "https://cdn.useframe.vercel.app/demo.mp4",
     //     width: 1280,
     //     height: 720,
     //   },
@@ -230,7 +231,7 @@ export const metadata: Metadata = {
   // verification: {},
   appleWebApp: {
     capable: true,
-    title: "Rapidhyre AI",
+    title: "Frame AI",
     statusBarStyle: "black-translucent",
     startupImage: [
       {
@@ -252,22 +253,22 @@ export const metadata: Metadata = {
   },
   // itunes: {
   //   appId: "123456789",
-  //   appArgument: "https://www.rapidhyre.ai",
+  //   appArgument: "https://www.useframe.vercel.app",
   // },
   appLinks: {
     // ios: {
-    //   url: "rapidhyre-ai://home",
+    //   url: "useframe://home",
     //   app_store_id: "123456789",
-    //   app_name: "rapidhyre-ai AI",
+    //   app_name: "Frame AI",
     // },
     // android: {
-    //   package: "com.rapidhyre-ai.app",
-    //   url: "intent://home#Intent;scheme=rapidhyre-ai;package=com.rapidhyre-ai.app;end",
-    //   class: "com.rapidhyre-ai.MainActivity",
-    //   app_name: "Rapidhyre AI",
+    //   package: "com.useframe.app",
+    //   url: "intent://home#Intent;scheme=useframe;package=com.useframe.app;end",
+    //   class: "com.useframe.MainActivity",
+    //   app_name: "Frame AI",
     // },
     // web: {
-    //   url: "https://www.rapidhyre.ai",
+    //   url: "https://www.useframe.vercel.app",
     //   should_fallback: true,
     // },
   },
@@ -281,15 +282,24 @@ export default function PoliciesRootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          "bg-background min-h-screen font-sans antialiased",
-          poppins.variable
-        )}
+        suppressHydrationWarning
+        className={cn(roboto.variable, "min-h-screen antialiased")}
       >
-        {children}
-        <Toaster />
-        <SpeedInsights />
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );
