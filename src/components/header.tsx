@@ -37,10 +37,10 @@ const Header = () => {
             contour={0.4}
             angle={70}
             speed={1}
-            scale={1}
+            scale={0.8}
             fit="cover"
           />
-          <span className="text-2xl font-bold">Frame AI</span>
+          <span className="text-xl font-bold">Frame</span>
         </Link>
         <SignedOut>
           <div className="flex gap-2">
