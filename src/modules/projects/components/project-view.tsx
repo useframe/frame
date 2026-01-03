@@ -18,12 +18,16 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FileExplorer } from "@/components/file-explorer";
 import { FileCollection } from "@/types/file";
+import { UserButton } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+import { useCurrentTheme } from "@/hooks/use-current-theme";
 
 interface ProjectViewProps {
   projectId: string;
 }
 
 const ProjectView = ({ projectId }: ProjectViewProps) => {
+  const { theme } = useCurrentTheme();
   const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
   const [tabState, setTabState] = useState<"preview" | "code">("preview");
 
@@ -69,6 +73,16 @@ const ProjectView = ({ projectId }: ProjectViewProps) => {
                     <CrownIcon /> Upgrade
                   </Link>
                 </Button>
+                <UserButton
+                  appearance={{
+                    elements: {
+                      userButtonBox: "rounded-md!",
+                      userButtonTrigger: "rounded-md!",
+                      userButtonAvatarBox: "rounded-md! size-8!",
+                    },
+                    theme: theme === "dark" ? dark : undefined,
+                  }}
+                />
               </div>
             </div>
             <TabsContent value="preview">
