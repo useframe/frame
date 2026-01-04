@@ -19,6 +19,7 @@ const projectData: Prisma.ProjectCreateInput[] = [
   {
     name: "Sample Project",
     description: "A sample project for testing",
+    userId: "seed-user-id",
     messages: {
       create: [
         {
