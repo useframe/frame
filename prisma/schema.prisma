@@ -56,3 +56,12 @@ model Project {
 
   messages Message[]
 }
+
+model Usage {
+  key       String    @id
+  point     Int
+  expiresAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
