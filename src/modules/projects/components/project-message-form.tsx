@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
 import { toast } from "sonner";
@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
+import { Usage } from "@/modules/projects/components/usage";
+import { useRouter } from "next/navigation";
 
 const projectMessageFormSchema = z.object({
   value: z
@@ -27,6 +29,7 @@ interface ProjectMessageFormProps {
 
 const ProjectMessageForm = ({ projectId }: ProjectMessageFormProps) => {
   const trpc = useTRPC();
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   const form = useForm<ProjectMessageFormType>({
@@ -36,6 +39,8 @@ const ProjectMessageForm = ({ projectId }: ProjectMessageFormProps) => {
     },
   });
 
+  const { data: usage } = useQuery(trpc.usage.getStatus.queryOptions());
+
   const { mutate: createMessage, isPending } = useMutation(
     trpc.messages.create.mutationOptions({
       onSuccess: () => {
@@ -43,9 +48,14 @@ const ProjectMessageForm = ({ projectId }: ProjectMessageFormProps) => {
         queryClient.invalidateQueries(
           trpc.messages.getMessages.queryOptions({ projectId })
         );
+        queryClient.invalidateQueries(trpc.usage.getStatus.queryOptions());
       },
       onError: (error) => {
         toast.error(error.message);
+
+        if (error.data?.code === "TOO_MANY_REQUESTS") {
+          router.push("/pricing");
+        }
       },
     })
   );
@@ -59,10 +69,16 @@ const ProjectMessageForm = ({ projectId }: ProjectMessageFormProps) => {
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const isButtonDisabled = isPending || !form.formState.isValid;
-  const showUsage = false;
+  const showUsage = !!usage;
 
   return (
     <Form {...form}>
+      {showUsage && (
+        <Usage
+          points={usage?.remainingPoints ?? 0}
+          msBeforeNext={usage?.msBeforeNext ?? 0}
+        />
+      )}
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(

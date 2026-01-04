@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FileExplorer } from "@/components/file-explorer";
 import { FileCollection } from "@/types/file";
-import { UserButton } from "@clerk/nextjs";
+import { useAuth, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { useCurrentTheme } from "@/hooks/use-current-theme";
 
@@ -27,7 +27,9 @@ interface ProjectViewProps {
 }
 
 const ProjectView = ({ projectId }: ProjectViewProps) => {
+  const { has } = useAuth();
   const { theme } = useCurrentTheme();
+  const hasProPlan = has?.({ plan: "pro" });
   const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
   const [tabState, setTabState] = useState<"preview" | "code">("preview");
 
@@ -68,11 +70,13 @@ const ProjectView = ({ projectId }: ProjectViewProps) => {
                 </TabsTrigger>
               </TabsList>
               <div className="ml-auto flex items-center gap-x-2">
-                <Button asChild size="sm">
-                  <Link href="/pricing">
-                    <CrownIcon /> Upgrade
-                  </Link>
-                </Button>
+                {!hasProPlan && (
+                  <Button asChild size="sm">
+                    <Link href="/pricing">
+                      <CrownIcon /> Upgrade
+                    </Link>
+                  </Button>
+                )}
                 <UserButton
                   appearance={{
                     elements: {
@@ -89,9 +93,6 @@ const ProjectView = ({ projectId }: ProjectViewProps) => {
               {!!activeFragment && <ProjectFragmentWeb data={activeFragment} />}
             </TabsContent>
             <TabsContent value="code" className="min-h-0">
-              {/* {!!activeFragment && (
-                <ProjectFragmentCode data={activeFragment} />
-              )} */}
               {!!activeFragment?.files && (
                 <FileExplorer files={activeFragment.files as FileCollection} />
               )}
