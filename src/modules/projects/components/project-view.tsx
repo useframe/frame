@@ -1,26 +1,27 @@
 "use client";
 
+import Link from "next/link";
+import { dark } from "@clerk/themes";
 import { Suspense, useState } from "react";
+import { useAuth, UserButton } from "@clerk/nextjs";
+import { ErrorBoundary } from "react-error-boundary";
+import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
 
+import { FileCollection } from "@/types/file";
+import { Fragment } from "@/generated/prisma/client";
+import { useCurrentTheme } from "@/hooks/use-current-theme";
+
+import { Button } from "@/components/ui/button";
 import {
-  ResizableHandle,
   ResizablePanel,
+  ResizableHandle,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
-
-import ProjectMessagesContainer from "./project-messages-container";
-import { Fragment } from "@/generated/prisma/client";
-import ProjectHeader from "./project-header";
-import ProjectFragmentWeb from "./project-fragment-web";
-import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { FileExplorer } from "@/components/file-explorer";
-import { FileCollection } from "@/types/file";
-import { useAuth, UserButton } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
-import { useCurrentTheme } from "@/hooks/use-current-theme";
+import ProjectHeader from "@/modules/projects/components/project-header";
+import ProjectFragmentWeb from "@/modules/projects/components/project-fragment-web";
+import ProjectMessagesContainer from "@/modules/projects/components/project-messages-container";
 
 interface ProjectViewProps {
   projectId: string;
@@ -41,16 +42,24 @@ const ProjectView = ({ projectId }: ProjectViewProps) => {
           minSize={20}
           className="flex flex-col min-h-0"
         >
-          <Suspense fallback={<div>Loading Project Header...</div>}>
-            <ProjectHeader projectId={projectId} />
-          </Suspense>
-          <Suspense fallback={<div>Loading Project Messages...</div>}>
-            <ProjectMessagesContainer
-              activeFragment={activeFragment}
-              setActiveFragment={setActiveFragment}
-              projectId={projectId}
-            />
-          </Suspense>
+          <ErrorBoundary
+            fallback={<div>Error: Failed to load project header</div>}
+          >
+            <Suspense fallback={<div>Loading Project Header...</div>}>
+              <ProjectHeader projectId={projectId} />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary
+            fallback={<div>Error: Failed to load project messages</div>}
+          >
+            <Suspense fallback={<div>Loading Project Messages...</div>}>
+              <ProjectMessagesContainer
+                activeFragment={activeFragment}
+                setActiveFragment={setActiveFragment}
+                projectId={projectId}
+              />
+            </Suspense>
+          </ErrorBoundary>
         </ResizablePanel>
         <ResizableHandle className="hover:bg-primary transition-colors" />
         <ResizablePanel defaultSize={65} minSize={50}>

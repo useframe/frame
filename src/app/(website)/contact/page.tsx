@@ -1,23 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Rocket,
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  ArrowLeft,
-  MessageSquare,
-  Clock,
-  Globe,
-} from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, Mail, Phone, MapPin, Rocket, ArrowLeft } from "lucide-react";
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -48,7 +39,9 @@ export default function ContactPage() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({
       ...formData,
@@ -89,15 +82,15 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="mb-6 text-4xl font-bold lg:text-5xl">
-              Let's Build AI Agents,
+              Let&apos;s Build AI Agents,
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {" "}
                 Together
               </span>
             </h1>
             <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Ready to build interactive web experiences? Our team is here to help you get started with
-              Frame AI.
+              Ready to build interactive web experiences? Our team is here to
+              help you get started with Frame AI.
             </p>
           </motion.div>
 
@@ -225,7 +218,9 @@ export default function ContactPage() {
                     <div>
                       <h3 className="mb-1 font-semibold">Email</h3>
                       <p className="text-gray-600">hello@useframe.vercel.app</p>
-                      <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
+                      <p className="text-sm text-gray-500">
+                        We&apos;ll respond within 24 hours
+                      </p>
                     </div>
                   </div>
 
@@ -236,7 +231,9 @@ export default function ContactPage() {
                     <div>
                       <h3 className="mb-1 font-semibold">Phone</h3>
                       <p className="text-gray-600">+1 (555) 123-4567</p>
-                      <p className="text-sm text-gray-500">Mon-Fri, 9AM-6PM EST</p>
+                      <p className="text-sm text-gray-500">
+                        Mon-Fri, 9AM-6PM EST
+                      </p>
                     </div>
                   </div>
 
@@ -259,11 +256,15 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-                    <span className="text-gray-700">AI-powered code assistance</span>
+                    <span className="text-gray-700">
+                      AI-powered code assistance
+                    </span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    <span className="text-gray-700">Enterprise-grade security</span>
+                    <span className="text-gray-700">
+                      Enterprise-grade security
+                    </span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="h-2 w-2 rounded-full bg-green-500"></div>
@@ -281,7 +282,9 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-gray-600">General Inquiries</span>
-                    <span className="font-semibold text-green-600">24 hours</span>
+                    <span className="font-semibold text-green-600">
+                      24 hours
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-600">Demo Requests</span>
@@ -289,11 +292,15 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-600">Enterprise Sales</span>
-                    <span className="font-semibold text-purple-600">2 hours</span>
+                    <span className="font-semibold text-purple-600">
+                      2 hours
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-600">Technical Support</span>
-                    <span className="font-semibold text-orange-600">1 hour</span>
+                    <span className="font-semibold text-orange-600">
+                      1 hour
+                    </span>
                   </div>
                 </div>
               </div>

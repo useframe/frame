@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from "clsx";
 
 import type { FileCollection, FileTreeItem, IFileTreeNode } from "@/types/file";
 

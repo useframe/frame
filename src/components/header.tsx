@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { LiquidMetal } from "@paper-design/shaders-react";
 import { dark } from "@clerk/themes";
+import { LiquidMetal } from "@paper-design/shaders-react";
 import {
   SignedIn,
   SignedOut,
@@ -11,10 +10,12 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
-import { useCurrentTheme } from "@/hooks/use-current-theme";
+
 import { useScroll } from "@/hooks/use-scroll";
+import { useCurrentTheme } from "@/hooks/use-current-theme";
 import { cn } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const { isScrolled } = useScroll();

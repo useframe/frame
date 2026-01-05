@@ -1,14 +1,9 @@
-import { z } from "zod";
-
 import { TRPCError } from "@trpc/server";
 import { protectedProcedure, createTRPCRouter } from "@/trpc/init";
-
-import prisma from "@/lib/prisma";
 import { getUsageStatus } from "@/lib/usage";
-import { inngest } from "@/lib/inngest/client";
 
 export const usageRouter = createTRPCRouter({
-  getStatus: protectedProcedure.query(async ({ ctx }) => {
+  getStatus: protectedProcedure.query(async () => {
     try {
       const result = await getUsageStatus();
       return result;

@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
+
 import { useTRPC } from "@/trpc/client";
-import ProjectMessageCard from "./project-message-card";
-import ProjectMessageForm from "./project-message-form";
 import { Fragment } from "@/generated/prisma/client";
-import ProjectMessageLoading from "./project-message-loading";
+
+import ProjectMessageCard from "@/modules/projects/components/project-message-card";
+import ProjectMessageForm from "@/modules/projects/components/project-message-form";
+import ProjectMessageLoading from "@/modules/projects/components/project-message-loading";
 
 interface ProjectMessagesContainerProps {
   projectId: string;
@@ -18,7 +20,7 @@ const ProjectMessagesContainer = ({
   projectId,
   activeFragment,
   setActiveFragment,
-}: ProjectMessagesContainerProps) => {
+}: Readonly<ProjectMessagesContainerProps>) => {
   const trpc = useTRPC();
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastAssistantMessageIdRef = useRef<string | null>(null);
@@ -27,7 +29,7 @@ const ProjectMessagesContainer = ({
     trpc.messages.getMessages.queryOptions(
       { projectId },
       {
-        refetchInterval: 5000,
+        refetchInterval: 3000,
       }
     )
   );

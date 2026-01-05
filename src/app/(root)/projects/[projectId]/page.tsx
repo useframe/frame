@@ -1,7 +1,10 @@
-import ProjectView from "@/modules/projects/components/project-view";
-import { getQueryClient, trpc } from "@/trpc/server";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+
+import { getQueryClient, trpc } from "@/trpc/server";
+
+import ProjectView from "@/modules/projects/components/project-view";
 
 interface ProjectProps {
   params: Promise<{
@@ -23,9 +26,11 @@ const Project = async ({ params }: ProjectProps) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<div>Loading Projects...</div>}>
-        <ProjectView projectId={projectId} />
-      </Suspense>
+      <ErrorBoundary fallback={<div>Error: Failed to load project</div>}>
+        <Suspense fallback={<div>Loading Projects...</div>}>
+          <ProjectView projectId={projectId} />
+        </Suspense>
+      </ErrorBoundary>
     </HydrationBoundary>
   );
 };
