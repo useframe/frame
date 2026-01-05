@@ -28,7 +28,7 @@ export function Usage({ points, msBeforeNext }: Readonly<UsageProps>) {
       const now = new Date();
       const end = new Date(now.getTime() + msBeforeNext);
       const duration = intervalToDuration({ start: now, end });
-      const format: (keyof Duration)[] = ["months", "days", "hours"];
+      const format: (keyof Duration)[] = ["months", "days", "hours", "minutes"];
       const formattedDuration = formatDuration(duration, { format });
       return formattedDuration;
     } catch (error) {
