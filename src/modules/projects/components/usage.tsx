@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo } from "react";
-import { formatDuration, intervalToDuration } from "date-fns";
+import { useAuth } from "@clerk/nextjs";
+import { CrownIcon } from "lucide-react";
+import { Duration, formatDuration, intervalToDuration } from "date-fns";
 
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { CrownIcon } from "lucide-react";
-import { useAuth } from "@clerk/nextjs";
 
 interface UsageProps {
   points: number;
@@ -24,13 +24,17 @@ export function Usage({ points, msBeforeNext }: Readonly<UsageProps>) {
   }, [points, hasProPlan]);
 
   const resetsIn = useMemo(() => {
-    return formatDuration(
-      intervalToDuration({
-        start: new Date(),
-        end: new Date(new Date().getTime() + msBeforeNext),
-      }),
-      { format: ["months", "days", "hours"] }
-    );
+    try {
+      const now = new Date();
+      const end = new Date(now.getTime() + msBeforeNext);
+      const duration = intervalToDuration({ start: now, end });
+      const format: (keyof Duration)[] = ["months", "days", "hours"];
+      const formattedDuration = formatDuration(duration, { format });
+      return formattedDuration;
+    } catch (error) {
+      console.error("Error formatting duration", error);
+      return "soon";
+    }
   }, [msBeforeNext]);
 
   return (
