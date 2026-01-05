@@ -58,9 +58,9 @@ model Project {
 }
 
 model Usage {
-  key       String    @id
-  point     Int
-  expiresAt DateTime?
+  key      String    @id
+  points   Int
+  expire   DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
