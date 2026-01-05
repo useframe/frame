@@ -16,7 +16,8 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
     console.error("Route error:", error);
   }, [error]);
 
-  const message = error?.message || "Something went wrong. We're working to fix it.";
+  const message =
+    error?.message || "Something went wrong. We're working to fix it.";
 
   return (
     <section className="bg-background flex min-h-screen flex-col items-center justify-center gap-4 px-4">
@@ -34,7 +35,9 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
           <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl">
             Oops! Something went wrong.
           </h1>
-          <p className="text-muted-foreground text-sm sm:text-base">{message}</p>
+          <p className="text-muted-foreground text-sm sm:text-base">
+            {message}
+          </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3 px-4">
           <Button aria-label="Retry" variant="outline" onClick={() => reset()}>

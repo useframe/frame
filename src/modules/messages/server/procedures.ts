@@ -1,10 +1,11 @@
 import { z } from "zod";
+
+import { TRPCError } from "@trpc/server";
 import { protectedProcedure, createTRPCRouter } from "@/trpc/init";
 
 import prisma from "@/lib/prisma";
-import { inngest } from "@/lib/inngest/client";
-import { TRPCError } from "@trpc/server";
 import { consumeCredits } from "@/lib/usage";
+import { inngest } from "@/lib/inngest/client";
 
 export const messagesRouter = createTRPCRouter({
   getMessages: protectedProcedure

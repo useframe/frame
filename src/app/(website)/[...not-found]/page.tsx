@@ -16,9 +16,12 @@ export default function NotFound() {
       />
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="space-y-1 text-center">
-          <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl">Page Not Found</h1>
+          <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl">
+            Page Not Found
+          </h1>
           <p className="text-muted-foreground text-sm sm:text-base">
-            It looks like the page you&apos;re looking for doesn&apos;t exist or has been moved.
+            It looks like the page you&apos;re looking for doesn&apos;t exist or
+            has been moved.
           </p>
         </div>
         <Link href="/" passHref>

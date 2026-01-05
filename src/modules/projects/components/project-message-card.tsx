@@ -1,9 +1,11 @@
-import { Card } from "@/components/ui/card";
-import { Fragment, MessageType, MessageRole } from "@/generated/prisma/client";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { format } from "date-fns";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
-import Image from "next/image";
+
+import { cn } from "@/lib/utils";
+import { Fragment, MessageType, MessageRole } from "@/generated/prisma/client";
+
+import { Card } from "@/components/ui/card";
 
 interface FragmentCardProps {
   fragment: Fragment;

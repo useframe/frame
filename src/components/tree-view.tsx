@@ -1,5 +1,6 @@
+import { ChevronRightIcon, FileIcon, FolderIcon } from "lucide-react";
+
 import { FileTreeItem } from "@/types/file";
-import React from "react";
 
 import {
   Collapsible,
@@ -18,7 +19,6 @@ import {
   SidebarProvider,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { ChevronRightIcon, FileIcon, FolderIcon } from "lucide-react";
 
 interface TreeViewProps {
   data: FileTreeItem[];

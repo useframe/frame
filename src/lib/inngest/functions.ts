@@ -23,6 +23,7 @@ import {
   parseAgentOutput,
   lastAssistantMessageContent,
 } from "@/lib/inngest/utils";
+import { SANDBOX_TIMEOUT } from "@/constants/sandbox";
 
 export interface AgentState {
   summary: string;
@@ -35,6 +36,7 @@ export const codeAgentFunction = inngest.createFunction(
   async ({ event, step }) => {
     const sandboxId = await step.run("get-sandbox-id", async () => {
       const sandbox = await Sandbox.create("frame-nextjs-template");
+      await sandbox.setTimeout(SANDBOX_TIMEOUT);
       return sandbox.sandboxId;
     });
 
@@ -47,8 +49,9 @@ export const codeAgentFunction = inngest.createFunction(
             projectId: event.data.projectId,
           },
           orderBy: {
-            createdAt: "asc",
+            createdAt: "desc",
           },
+          take: 5,
         });
 
         for (const message of messages) {
@@ -59,7 +62,7 @@ export const codeAgentFunction = inngest.createFunction(
           });
         }
 
-        return formattedMessages;
+        return formattedMessages.reverse();
       }
     );
 
@@ -181,9 +184,8 @@ export const codeAgentFunction = inngest.createFunction(
       ],
       lifecycle: {
         onResponse: async ({ result, network }) => {
-          const lastAssistantTextMessage = await lastAssistantMessageContent(
-            result
-          );
+          const lastAssistantTextMessage =
+            await lastAssistantMessageContent(result);
 
           if (lastAssistantTextMessage && network) {
             if (lastAssistantTextMessage.includes("<task_summary>")) {
@@ -239,7 +241,7 @@ export const codeAgentFunction = inngest.createFunction(
 
     const isError = Boolean(
       !result.state.data.summary ||
-        Object.keys(result.state.data.files || {}).length === 0
+      Object.keys(result.state.data.files || {}).length === 0
     );
 
     const sandboxUrl = await step.run("get-sandbox-url", async () => {

@@ -1,12 +1,22 @@
-import React, { Fragment, useCallback, useMemo, useState } from "react";
 import { CopyIcon, CopyCheckIcon } from "lucide-react";
+import { Fragment, useCallback, useMemo, useState } from "react";
+
+import { FileCollection } from "@/types/file";
+import { convertFilesToTreeItems, getLanguageFromExtension } from "@/lib/utils";
+
 import { CodeView } from "@/components/code";
 import { Button } from "@/components/ui/button";
+import { TreeView } from "@/components/tree-view";
 import {
   ResizablePanel,
   ResizableHandle,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -16,10 +26,6 @@ import {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
 } from "@/components/ui/breadcrumb";
-import { convertFilesToTreeItems, getLanguageFromExtension } from "@/lib/utils";
-import { FileCollection } from "@/types/file";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { TreeView } from "./tree-view";
 
 interface FileBreadcrumbProps {
   filePath: string;
